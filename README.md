@@ -1,1 +1,2 @@
-# actual-final-project
+# final-project
+Accelerated CS Final Project
