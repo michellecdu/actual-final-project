@@ -1,19 +1,24 @@
-import java.applet.*;
-
-public class Sound{ //plays the sound in our game
-   public static AudioClip getClip (String arg) throws Exception {
-      System.out.println("Gets Song");
-      return null;
-   }
-
-   public static void play(String arg) { //plays song
-         System.out.println("Plays Song");
-   }
-   
-   public static void stop(String arg) { //stops song
-         System.out.println("Stops Song"); 
-      
-   }
-
+import java.io.File; 
+import java.io.IOException; 
+import javax.sound.sampled.AudioInputStream; 
+import javax.sound.sampled.AudioSystem; 
+import javax.sound.sampled.Clip; 
+  
+public class Sound {
+    public static synchronized void play(final String fileName) 
+    {
+        // plays "do you want to build a snowman" from Frozen             
+        new Thread(new Runnable() { 
+            public void run() {
+                try {
+                    Clip clip = AudioSystem.getClip();
+                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(fileName));
+                    clip.open(inputStream);
+                    clip.start(); 
+                } catch (Exception e) {
+                    System.out.println("play sound error: " + e.getMessage() + " for " + fileName);
+                }
+            }
+        }).start();
+    }
 }
-
